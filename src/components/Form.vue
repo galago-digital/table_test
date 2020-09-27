@@ -20,11 +20,13 @@
       </label>
       <label for="date">
         <p>Дата рождения</p>
-        <datetime
+        <datepicker
+          :language="ru"
           class="form-user__input-date"
           v-model="date"
+          name="uniquename"
           format="dd.MM.yyyy"
-        ></datetime>
+        ></datepicker>
       </label>
       <label for="email">
         <p>Email</p>
@@ -85,10 +87,12 @@
 <script>
 /* eslint-disable */
 import { mapGetters } from "vuex";
-import { Datetime } from "vue-datetime";
+import Datepicker from "vuejs-datepicker";
+import { ru } from "vuejs-datepicker/dist/locale";
 import Select from "./Select";
 export default {
   data: () => ({
+    ru: ru,
     name: "",
     date: null,
     distance: {
@@ -107,6 +111,7 @@ export default {
   components: {
     datetime: Datetime,
     Select,
+    Datepicker,
   },
 
   computed: {
