@@ -109,7 +109,6 @@ export default {
     },
   }),
   components: {
-    datetime: Datetime,
     Select,
     Datepicker,
   },
