@@ -6,8 +6,10 @@
         <th>ФИО участника забега</th>
         <th>
           <div class="table__sort-button">
-            <button v-if="aSortCol[0]" @click="sort('date', 0)">&#8593;</button>
-            <button v-if="!aSortCol[0]" @click="sortable('date', 0)">
+            <button v-if="aSortCol[0]" @click="sortUp('date', 0)">
+              &#8593;
+            </button>
+            <button v-if="!aSortCol[0]" @click="sortDown('date', 0)">
               &#8595;
             </button>
           </div>
@@ -17,10 +19,10 @@
         <th>Телефон</th>
         <th>
           <div class="table__sort-button">
-            <button v-if="aSortCol[1]" @click="sort('distance', 1)">
+            <button v-if="aSortCol[1]" @click="sortUp('distance', 1)">
               &#8593;
             </button>
-            <button v-if="!aSortCol[1]" @click="sortable('distance', 1)">
+            <button v-if="!aSortCol[1]" @click="sortDown('distance', 1)">
               &#8595;
             </button>
           </div>
@@ -28,10 +30,10 @@
         </th>
         <th>
           <div class="table__sort-button">
-            <button v-if="aSortCol[2]" @click="sort('payment', 2)">
+            <button v-if="aSortCol[2]" @click="sortUp('payment', 2)">
               &#8593;
             </button>
-            <button v-if="!aSortCol[2]" @click="sortable('payment', 2)">
+            <button v-if="!aSortCol[2]" @click="sortDown('payment', 2)">
               &#8595;
             </button>
           </div>
@@ -68,17 +70,17 @@ export default {
     count: 0,
   }),
   created() {
-    this.sort("date", 0);
+    // this.sort("date", 0);
   },
   computed: {
     ...mapGetters(["tableData"]),
   },
   methods: {
-    sort(col, enabled) {
+    sortUp(col, enabled) {
       this.$store.dispatch("sortTable", col);
       this.aSortCol[enabled] = !this.aSortCol[enabled];
     },
-    sortable(col, enabled) {
+    sortDown(col, enabled) {
       this.$store.dispatch("sortTablePlus", col);
       this.aSortCol[enabled] = !this.aSortCol[enabled];
     },
@@ -106,11 +108,28 @@ export default {
   margin-top: 30px;
   table {
     border-collapse: collapse;
+    table-layout: fixed;
   }
   th,
   td {
     position: relative;
     border: 1px solid #000;
+    word-wrap: break-word;
+  }
+  td:nth-child(1) {
+    width: 5%;
+  }
+  td:nth-child(2) {
+    width: 30%;
+  }
+  td:nth-child(3),
+  td:nth-child(4),
+  td:nth-child(5) {
+    width: 15%;
+  }
+  td:nth-child(6),
+  td:nth-child(7) {
+    width: 10%;
   }
   &__header {
     text-align: left;

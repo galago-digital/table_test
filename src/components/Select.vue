@@ -9,6 +9,7 @@
         :id="distance"
         readonly
         @click.stop="visible = true"
+        placeholder="Дистанция забега"
       />
     </label>
     <div v-if="visible">

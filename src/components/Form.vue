@@ -15,6 +15,7 @@
           type="text"
           name="name"
           id="name"
+          placeholder="ФИО"
         />
         <p v-show="error.name">Поля обязательное для заполнения</p>
       </label>
@@ -26,6 +27,7 @@
           v-model="date"
           name="uniquename"
           format="dd.MM.yyyy"
+          placeholder="Дата рождения"
         ></datepicker>
       </label>
       <label for="email">
@@ -37,6 +39,7 @@
           type="email"
           name="email"
           id="email"
+          placeholder="Email"
         />
         <p>{{ error.emailText }}</p>
       </label>
@@ -50,6 +53,7 @@
           name="phone"
           id="phone"
           @input="validEmail"
+          placeholder="Номер телефона: +7"
         />
       </label>
       <Select
@@ -68,6 +72,7 @@
           type="text"
           name="payment"
           id="payment"
+          placeholder="Сумма взноса"
         />
         <p v-show="error.payment">Поля обязательное для заполнения</p>
       </label>
