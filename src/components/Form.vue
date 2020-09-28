@@ -7,6 +7,7 @@
       @submit.prevent="submit"
     >
       <label for="name">
+        <!-- исользование <p> внутри <label> не валидно --> 
         <p>ФИО участника забега</p>
         <input
           class="form-user__input"
@@ -122,6 +123,8 @@ export default {
     ...mapGetters(["listDistance", "tableData", "tableDataId"]),
     enabledForm() {
       //   debugger;
+      // не нужное присвоение переменных let validEmail и т.д.
+      // можно точно так же использовать this.distance
       let validEmail = this.validEmail();
       let distance = this.distance;
       let date = this.date;

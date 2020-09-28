@@ -1,6 +1,10 @@
 <template>
   <div class="form-user__container-list">
-    <label :for="distance">
+    <!--
+      :for="distance" - не работает пока хотя бы раз не сделали выбор, т.к. начально distance - пустая строка
+      label передаст фокус для дочернего input и без атрибута for, он тут не нужен
+      -->
+    <label>
       <p>{{ label }}</p>
       <input
         class="form-user__input"
@@ -23,6 +27,9 @@
 </template>
 
 <script>
+/**
+ * Для чего этот компонент? Обычный select решает ту же задачу и без лишнего кода
+ */
 export default {
   data: () => ({
     distance: "",

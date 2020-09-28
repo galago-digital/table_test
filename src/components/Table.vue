@@ -76,6 +76,11 @@ export default {
     ...mapGetters(["tableData"]),
   },
   methods: {
+    /**
+     * sortUp и sortDown легко объединить в один метод, избежав этим использования v-if в template;
+     * при сортировке не учитывается пагинация, т.е. раз вывод разделен на части по 2 записи, то и сортировать нужно внутри части,
+     * а сейчас в сортировке участвует весь список
+     */
     sortUp(col, enabled) {
       this.$store.dispatch("sortTable", col);
       this.aSortCol[enabled] = !this.aSortCol[enabled];
@@ -89,10 +94,14 @@ export default {
       this.count = index;
     },
     formatDate(date) {
+      /* 
+      в реальном проекте никто не будет хранить дату в таком формате "date": "Wed Mar 11 1987 05:00:00 GMT+0500 (Екатеринбург, стандартное время)" 
+      эту проблему надо было решать по другому
+      */
       date = new Date(date);
       let dd = date.getDate();
       let mm = date.getMonth() + 1;
-      if (mm < 10) mm = "0" + mm;
+      if (mm < 10) mm = "0" + mm; // для dd нужно было сделать так же, сейчас получается например так - 	2.09.2020
 
       let yyyy = date.getFullYear();
 
@@ -104,6 +113,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+/* здесь не используется scss, т.е. просто лишнее преобразование при сборке */
 .table {
   margin-top: 30px;
   table {
@@ -122,6 +132,10 @@ export default {
   td:nth-child(2) {
     width: 30%;
   }
+  /*
+  разумнее было бы использовать классы чтобы установить ширину
+  допустим добавилась еще колонка - придется переставлять все nth-child в стилях
+   */
   td:nth-child(3),
   td:nth-child(4),
   td:nth-child(5) {

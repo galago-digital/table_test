@@ -9,6 +9,8 @@ export default ({
             state.tableData.users.push(payload)
         },
         sortTable(state, payload) {
+            // вот это все лучше делать в action
+            // оставили mutations только для записи данных
             let arrayUser = state.tableData.users
             arrayUser.sort((a, b) => {
                 if (payload == 'date') {
@@ -32,6 +34,10 @@ export default ({
             })
         },
         sortTablePlus(state, payload) {
+            /**
+             * sortTablePlus и sortTable делают по сути одно и тоже, их легко можно объеденить
+             * сейчас получает дублирование кода
+             */
             let arrayUser = state.tableData.users
             arrayUser.sort((a, b) => {
                 if (payload == 'date') {
@@ -71,6 +77,11 @@ export default ({
         },
         tableData(state) {
             console.log(state.tableData.users);
+            /**
+             * 2 - лучше бы вынести в константу с понятным именем
+             * разбивать таблицу на чанки чтобы потом выбрать нужный используя для этого lodash (а болше нигде он не используется) - избыточно
+             * зная текущую страницу пагинации легко полчить нужный "кусок" таблицы использую slice
+             */
             let tableData = _.chunk(state.tableData.users, 2)
             return tableData
         }
